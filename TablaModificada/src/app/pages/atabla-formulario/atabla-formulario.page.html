@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Tabla de registros</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        {{ editando ? 'Modificar Registro' : 'Añadir Nuevo Registro' }}
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-input 
+          label="Nombre" 
+          labelPlacement="floating" 
+          [(ngModel)]="nuevaPersona.nombre">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input 
+          label="Apellido" 
+          labelPlacement="floating" 
+          [(ngModel)]="nuevaPersona.apellido">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input 
+          label="Edad" 
+          type="number" 
+          labelPlacement="floating" 
+          [(ngModel)]="nuevaPersona.edad">
+        </ion-input>
+      </ion-item>
+      
+      <ion-button 
+        expand="block" 
+        (click)="guardarPersona()" 
+        [color]="editando ? 'warning' : 'success'" 
+        class="ion-margin-top">
+        <ion-icon name="save-outline" slot="start"></ion-icon>
+        {{ editando ? 'Actualizar Cambios' : 'Añadir a Tabla' }}
+      </ion-button>
+
+      <ion-button 
+        *ngIf="editando" 
+        fill="clear" 
+        expand="block" 
+        (click)="limpiarFormulario()" 
+        color="medium">
+        Cancelar
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <div style="overflow-x:auto; margin-top: 20px;">
+    <table style="width: 100%; border-collapse: collapse; text-align: left;" border="1">
+      <thead style="background-color: #f2f2f2;">
+        <tr>
+          <th style="padding: 10px;">Nombre</th>
+          <th style="padding: 10px;">Apellido</th>
+          <th style="padding: 10px;">Edad</th>
+          <th style="padding: 10px;">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of listaPersonas">
+          <td style="padding: 10px;">{{ p.nombre }}</td>
+          <td style="padding: 10px;">{{ p.apellido }}</td>
+          <td style="padding: 10px;">{{ p.edad }}</td>
+          <td style="padding: 10px;">
+            <ion-button color="warning" size="small" (click)="prepararEdicion(p)">
+              Modificar
+            </ion-button>
+            <ion-button color="danger" size="small" (click)="borrarPersona(p._id)">
+              Eliminar
+            </ion-button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ion-content>

@@ -1,0 +1,7 @@
+{
+  "name": "TablaModificada",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
